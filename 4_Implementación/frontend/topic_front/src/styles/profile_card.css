@@ -1,0 +1,19 @@
+#profile-pic {
+    border-radius: 110px;
+    width: 140px;
+    margin-left: 3rem;
+}
+
+#profile-card {
+    width: 60rem;
+    border: 0;
+    justify-content: center;
+    align-content: center;
+}
+
+#presentation-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
