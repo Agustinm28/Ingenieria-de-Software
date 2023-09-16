@@ -29,6 +29,7 @@ const ShowEditUser = () => {
                 if (status === 200) {
                     //console.log(user)
                     setInputs(user)
+                    console.log(user)
                 }
                 else {
                     console.log(user)
@@ -44,6 +45,8 @@ const ShowEditUser = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        console.log(inputs)
 
         const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
 
@@ -127,6 +130,10 @@ const ShowEditUser = () => {
                                 <div className="mb-3">
                                     <label id="login-text">Email</label>
                                     <input type="email" value={inputs.email} className="form-control" name="email" onChange={handleChange} />
+                                </div>
+                                <div className="mb-3">
+                                    <label id="login-text">Password</label>
+                                    <input type="password" placeholder="Set new password (leave empty to keep current password)" className="form-control" name="password" onChange={handleChange} />
                                 </div>
                             </div>
                             <div id='button-col' className="col-12">

@@ -1,5 +1,5 @@
 from flask import request
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import jwt_required, jwt_required
 from flask_restx import Namespace, Resource
 from models.users import User
@@ -69,7 +69,8 @@ class UserResources(Resource):
             user.lname = lname
             user.uname = uname
             user.email = email
-            user.password = generate_password_hash(password, method='sha256')
+            if password != user.password:
+                user.password = generate_password_hash(password, method='sha256')
 
             db.session.commit()
 
