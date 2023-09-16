@@ -29,7 +29,6 @@ const ShowEditUser = () => {
                 if (status === 200) {
                     //console.log(user)
                     setInputs(user)
-                    console.log(user)
                 }
                 else {
                     console.log(user)
@@ -45,8 +44,6 @@ const ShowEditUser = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        console.log(inputs)
 
         const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
 
