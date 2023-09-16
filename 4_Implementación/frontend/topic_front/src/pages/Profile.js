@@ -10,11 +10,13 @@ const NewMessage = async () => {
     //console.log(message)
 
     Swal.fire({
-        title: 'New Message',
-        html: `<input type="text" id="title" class="swal2-input" placeholder="Title">` +
-            `<textarea id="content" class="swal2-textarea" rows="100" cols="33" placeholder="Type your message here..."></textarea>`,
+        title: "<h5 style='color:azure; font-size:2rem'>New Message</h5>",
+        html: `<input type="text" style='color:azure' id="title" class="swal2-input" placeholder="Title">` +
+            `<textarea id="content" style='color:azure' class="swal2-textarea" rows="100" cols="33" placeholder="Type your message here..."></textarea>`,
+        background: '#282c34',
         focusConfirm: false,
         showCancelButton: true,
+        confirmButtonColor: '#494996',
         confirmButtonText: 'Submit',
         preConfirm: async () => {
             const title = document.getElementById('title').value;
@@ -58,27 +60,42 @@ const NewMessage = async () => {
                         const status = data[1]
                         if (status === 201) {
                             //console.log(message)
-                            Swal.fire({
-                                title: 'Message posted!',
-                                icon: 'success',
-                                toast: true,
-                                position: 'bottom-end',
-                                showConfirmButton: false,
-                                timer: 3000
-                            })
+                            fireToastSuccess(message.message)
                         }
                         else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: message,
-                                icon: 'error',
-                                showConfirmButton: true
-                            })
+                            fireToastError(message.message)
                         }
                     })
 
             }
         })
+}
+
+const fireToastSuccess = (message) => {
+    Swal.fire({
+        title: "<h5 style='color:azure; font-size:1.3rem'>Message posted!</h5>",
+        color: 'azure',
+        background: '#323844',
+        icon: 'success',
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000
+    })
+}
+
+const fireToastError = (message) => {
+    Swal.fire({
+        title: "<h5 style='color:azure; font-size:1.3rem'>Error</h5>",
+        text: message,
+        color: 'azure',
+        icon: 'error',
+        background: '#323844',
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 6000
+    })
 }
 
 const LoggedInLinks = () => {
@@ -124,8 +141,8 @@ const LoggedInLinks = () => {
 
     return (
         <>
-            <div id="tab-row" className='row'>
-                <ProfileCard 
+            <div id="tab-row-profile" className='row'>
+                <ProfileCard
                     fname={userData.fname}
                     lname={userData.lname}
                     uname={userData.uname}
@@ -135,7 +152,7 @@ const LoggedInLinks = () => {
             </div>
             <hr></hr>
             <div id="new-div">
-                <Button variant="primary" onClick={() => (NewMessage())} className='m-3'>
+                <Button id='login-button' variant="primary" onClick={() => (NewMessage())} className='m-3'>
                     New message
                 </Button>
             </div>

@@ -9,11 +9,14 @@ const NewMessage = async () => {
   //console.log(message)
 
   Swal.fire({
-    title: 'New Message',
-    html: `<input type="text" id="title" class="swal2-input" placeholder="Title">` +
-      `<textarea id="content" class="swal2-textarea" rows="100" cols="33" placeholder="Type your message here..."></textarea>`,
+    title: "<h5 style='color:azure; font-size:2rem'>New Message</h5>",
+    background: '#282c34',
+    font: 'Roboto',
+    html: `<input type="text" style='color:azure' id="title" class="swal2-input" placeholder="Title">` +
+      `<textarea id="content" style='color:azure' class="swal2-textarea" rows="100" cols="33" placeholder="Type your message here..."></textarea>`,
     focusConfirm: false,
     showCancelButton: true,
+    confirmButtonColor: '#494996',
     confirmButtonText: 'Submit',
     preConfirm: async () => {
       const title = document.getElementById('title').value;
@@ -48,36 +51,51 @@ const NewMessage = async () => {
         }
         //console.log(requestOptions)
         fetch('/messages/messages', requestOptions)
-        .then(response => Promise.all([
-          response.json(),
-          response.status
-        ]))
-        .then(data => {
-          const message = data[0]
-          const status = data[1]
-          if (status === 201) {
-            //console.log(message)
-            Swal.fire({
-              title: 'Message posted!',
-              icon: 'success',
-              toast: true,
-              position: 'bottom-end',
-              showConfirmButton: false,
-              timer: 3000
-            })
-          }
-          else {
-            Swal.fire({
-              title: 'Error',
-              text: message,
-              icon: 'error',
-              showConfirmButton: true
-            })
-          }
-        })
+          .then(response => Promise.all([
+            response.json(),
+            response.status
+          ]))
+          .then(data => {
+            const message = data[0]
+            const status = data[1]
+            if (status === 201) {
+              //console.log(message)
+              fireToastSuccess(message.message)
+            }
+            else {
+              fireToastError(message.message)
+            }
+          })
 
       }
     })
+}
+
+const fireToastSuccess = (message) => {
+  Swal.fire({
+      title: "<h5 style='color:azure; font-size:1.3rem'>Message posted!</h5>",
+      color: 'azure',
+      background: '#323844',
+      icon: 'success',
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000
+  })
+}
+
+const fireToastError = (message) => {
+  Swal.fire({
+      title: "<h5 style='color:azure; font-size:1.3rem'>Error</h5>",
+      text: message,
+      color: 'azure',
+      icon: 'error',
+      background: '#323844',
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 6000
+  })
 }
 
 
@@ -116,20 +134,26 @@ const LoggedInLinks = () => {
   return (
     <>
       <div id="tab-row" className='row'>
+        <hr id='divider-home'></hr>
+        <div id='title-col' className='col-12'>
+          <h1 id='Messages'>Messages</h1>
+        </div>
+        <p></p>
+        <hr id='divider-home'></hr>
         <div id="tendencies-col" className='col-6'>
-          <h4>
+          <h4 id='home-titles'>
             Tendencies
           </h4>
         </div>
         <div id="following-col" className='col-6'>
-          <h4>
+          <h4 id='home-titles'>
             Following
           </h4>
         </div>
+        <hr id='divider-home'></hr>
       </div>
-      <hr></hr>
       <div id="new-div">
-        <Button variant="primary" onClick={() => (NewMessage())} className='m-3'>
+        <Button id='login-button' variant="primary" onClick={() => (NewMessage())} className='m-3'>
           New message
         </Button>
       </div>
@@ -152,25 +176,30 @@ const LoggedInLinks = () => {
 }
 
 const LoggedOutLinks = () => {
+
   return (
     <>
-      <div>
-        <h2>Welcome to Topic!</h2>
-        <p>Please, log in to see the messages</p>
-        <div>
-          <Button variant="primary" href='/login' className='mt-1'>
-            Login
-          </Button>
+      <div id="welcome-row" className='row'>
+        <div id="welcome-col" className='col-6'>
+          <h2 id="welcome">Welcome to Topic!</h2>
+          <p id="welcomet">Please, log in to see the messages</p>
+          <div>
+            <Button id='login-button' variant="primary" href='/login' className='mt-1'>
+              Login
+            </Button>
+          </div>
+          <div className='mt-3'>
+            <small id="account">
+              Do not have an account?
+              <Link id="create-account" className='m-2' to="/register">
+                Create account
+              </Link>
+            </small>
+          </div>
         </div>
-        <div className='mt-3'>
-          <small>
-            Do not have an account?
-            <Link className='m-2' to="/register">
-              Create account
-            </Link>
-          </small>
+        <div className='col-6' id='image'>
         </div>
-      </div >
+      </div>
     </>
   )
 }
@@ -181,9 +210,6 @@ const Home = () => {
 
   return (
     <div>
-      <hr></hr>
-      <h1>Messages</h1>
-      <hr></hr>
       <div>
         {logged ? <LoggedInLinks /> : <LoggedOutLinks />}
       </div>

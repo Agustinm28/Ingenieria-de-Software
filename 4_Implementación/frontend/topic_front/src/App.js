@@ -11,15 +11,23 @@ import Profile from './pages/Profile';
 
 import "./styles/message.css";
 import "./styles/Home.css";
+import "./styles/Login.css";
+import "./styles/Register.css";
 import "./styles/profile_card.css";
 import "./styles/Profile.css";
+import "./styles/navbar.css";
+import "./styles/ABM.css";
+import "./styles/Edit.css";
+import "./styles/notfound.css";
+import "./App.css";
 
 function App() {
   return (
-      <div>
+      <div id="App">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>
         <BrowserRouter>
           <Navbar />
-          <div className="container p-4">
+          <div id='App-container' className="container p-4">
           <Routes>
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<LoginUser />} />

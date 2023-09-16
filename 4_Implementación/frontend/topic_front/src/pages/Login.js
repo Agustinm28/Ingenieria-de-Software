@@ -64,8 +64,10 @@ const Login = () => {
 
     const fireToastSuccess = (message) => {
         Swal.fire({
-            title: 'Success!',
+            title: "<h5 style='color:azure; font-size:1.5rem'>Success!</h5>",
             text: message,
+            color: 'azure',
+            background: '#323844',
             icon: 'success',
             toast: true,
             position: 'bottom-end',
@@ -76,9 +78,11 @@ const Login = () => {
 
     const fireToastError = (message) => {
         Swal.fire({
-            title: 'Error!',
+            title: "<h5 style='color:azure; font-size:1.5rem'>Error</h5>",
             text: message,
+            color: 'azure',
             icon: 'error',
+            background: '#323844',
             toast: true,
             position: 'bottom-end',
             showConfirmButton: false,
@@ -89,51 +93,51 @@ const Login = () => {
     return (
         <div>
             <div className='container h-100'>
-                <div className='row'>
-                    <div className='col-2'></div>
-                    <div className='col-8'>
-                        <hr></hr>
-                        <h1>Login</h1>
-                        <hr></hr>
-                        <form>
+                <div id="login-row" className='row'>
+                    <div id="login-col" className='row'>
+                        <hr id="divider"></hr>
+                        <h1 id="login-title">Login</h1>
+                        <hr id="divider"></hr>
+                    </div>
+                    <div id="form-col" className='row'>
+                        <form id="form">
                             <Form.Group>
-                                <Form.Label>Email</Form.Label>
+                                <Form.Label id="login-text">Email</Form.Label>
                                 <Form.Control type="email" {...register("email", { required: true, maxLength: 80 })}/>
                                 {errors.email?.type === "required" && <p style={{ color: "red" }}><small>Email is required</small></p>}
                                 {errors.email?.type === "maxLength" && <p style={{ color: "red" }}><small>Email is too long</small></p>}
                             </Form.Group>
                             <p></p>
                             <Form.Group>
-                                <Form.Label>Password</Form.Label>
+                                <Form.Label id="login-text">Password</Form.Label>
                                 <Form.Control type="password" {...register("password", { required: true, minLength: 8 })}/>
                                 {errors.password?.type === "required" && <p style={{ color: "red" }}><small>Password is required</small></p>}
                                 {errors.password?.type === "minLength" && <p style={{ color: "red" }}><small>Password is too short</small></p>}
                             </Form.Group>
                             <p></p>
-                            <Form.Group>
-                                <Button as="sub" variant="primary" onClick={handleSubmit(loginUser)} className='mt-1'>
+                            <Form.Group id="button-group">
+                                <Button id="login-button" as="sub" variant="primary" onClick={handleSubmit(loginUser)} className='mt-1'>
                                     Login
                                 </Button>
                             </Form.Group>
                             <Form.Group className='mt-3'>
-                                <small>
+                                <small id="login-text-2">
                                     Do not have an account?
-                                    <Link className='m-2' to="/register">
+                                    <Link id="create-account" className='m-2' to="/register">
                                         Create account
                                     </Link>
                                 </small>
                             </Form.Group>
                             <Form.Group className='mt-2'>
-                                <small>
+                                <small id="login-text-2">
                                     Forgot your password?
-                                    <Link className='m-2' to="#">
+                                    <Link id="create-account" className='m-2' to="#">
                                         Reset password
                                     </Link>
                                 </small>
                             </Form.Group>
                         </form>
                     </div>
-                    <div className='col-2'></div>
                 </div>
             </div>
         </div>

@@ -14,19 +14,20 @@ const ProfileCard = (props) => {
 
     return (
         <div id='profile-card' className="card m-3">
+            <hr id='divider'></hr>
             <div id="profile-body" className="card-body">
                 <div id="presentation-row" className='row'>
-                    <div className='col-3'>
-                        <img id="profile-pic" src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" className="avatar" />
+                    <div id='profile-image' className='col-3'>
                     </div>
                     <div className='col-9'>
                         <h3 className="card-title">{fname} {lname}</h3>
                         <h5 className="card-title">{uname}</h5>
                         <p className="card-text">{email}</p>
-                        <p className="card-text">{roleName}</p>
+                        <p id='role' className="card-text">{roleName}</p>
                     </div>
                 </div>
             </div>
+            <hr id='divider'></hr>
         </div>
     )
 }
