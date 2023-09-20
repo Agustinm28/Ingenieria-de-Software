@@ -47,6 +47,12 @@ const ShowEditUser = () => {
 
         const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
 
+        // Check if inputs are empty
+        if (inputs.fname === '' || inputs.lname === '' || inputs.uname === '' || inputs.email === '') {
+            fireToastError('Please fill all the fields')
+            return
+        }
+
         fetch(`/users/user/${id}`, {
             method: 'PUT',
             body: JSON.stringify(inputs),
